@@ -1,52 +1,19 @@
-require("dotenv").config();
-const express = require("express");
-const { create } = require("venom-bot");
-const path = require("path");
+const venom = require('venom-bot');
+const puppeteer = require('puppeteer');
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+// força o Venom a usar o Chromium instalado pelo Puppeteer
+process.env.CHROME_BIN = puppeteer.executablePath();
 
-app.use(express.json());
-
-let client;
-
-// Caminho absoluto para o Chrome instalado
-const chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
-
-create({
-  session: "bot-session",
-  multidevice: true,
-  browserArgs: [
-    '--no-sandbox',
-    '--disable-setuid-sandbox',
-    '--disable-dev-shm-usage',
-    '--disable-accelerated-2d-canvas',
-    '--no-first-run',
-    '--no-zygote',
-    '--single-process',
-    '--disable-gpu',
-    '--headless=new' // Usa o novo modo headless
-  ],
-  executablePath: chromePath, // Caminho para o Chrome
-})
-  .then((venomClient) => {
-    client = venomClient;
-    console.log("✅ Bot iniciado com sucesso");
-
+venom
+  .create({
+    browserArgs: ['--no-sandbox'],
+    executablePath: process.env.CHROME_BIN
+  })
+  .then((client) => {
+    // seu código continua aqui
     client.onMessage((message) => {
-      if (message.body === "oi" && message.isGroupMsg === false) {
-        client.sendText(message.from, "Olá! Eu sou um bot automatizado.");
+      if (message.body === 'Oi' && message.isGroupMsg === false) {
+        client.sendText(message.from, 'Oi! Tudo bem?');
       }
     });
-  })
-  .catch((err) => {
-    console.error("Erro ao iniciar o Venom:", err);
   });
-
-app.get("/", (req, res) => {
-  res.send("Bot Venom está rodando!");
-});
-
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando na porta ${PORT}`);
-});
