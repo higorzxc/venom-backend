@@ -1,4 +1,3 @@
-console.log('✅ Chromium fixo usado em produção:', chromiumPath);
 
 // Inicializa o bot com o Chrome instalado no Render
 const client = await venom.create({
