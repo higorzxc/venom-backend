@@ -9,9 +9,6 @@ app.use(express.json());
 
 let client;
 
-// Ajuste para rodar o Chrome com o novo modo headless
-const chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
-
 create({
   session: "bot-session",
   multidevice: true,
@@ -25,8 +22,8 @@ create({
     '--single-process',
     '--disable-gpu',
     '--headless=new'
-  ],
-  executablePath: chromePath,
+  ]
+  // Sem 'executablePath' aqui
 })
   .then((venomClient) => {
     client = venomClient;
