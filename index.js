@@ -1,35 +1,27 @@
 const puppeteer = require('puppeteer');
+const venom = require('venom-bot');
 
 (async () => {
   try {
-    const browserFetcher = puppeteer.createBrowserFetcher();
-    const revisionInfo = await browserFetcher.download('1221211');
-    console.log('Chromium baixado com sucesso:', revisionInfo.executablePath);
-    
-    // Define a variável para o caminho do Chromium baixado
-    process.env.CHROME_BIN = revisionInfo.executablePath;
+    const chromiumPath = puppeteer.executablePath();
+    process.env.CHROME_BIN = chromiumPath;
 
-    const venom = require('venom-bot');
+    console.log('✅ Chromium localizado em:', chromiumPath);
 
-    venom
-      .create({
-        browserArgs: ['--no-sandbox'],
-        executablePath: process.env.CHROME_BIN
-      })
-      .then((client) => {
-        console.log('✅ Bot iniciado com sucesso');
+    const client = await venom.create({
+      browserArgs: ['--no-sandbox'],
+      executablePath: chromiumPath
+    });
 
-        client.onMessage((message) => {
-          if (message.body === 'Oi' && message.isGroupMsg === false) {
-            client.sendText(message.from, 'Oi! Tudo bem?');
-          }
-        });
-      })
-      .catch((err) => {
-        console.error('Erro ao iniciar o Venom:', err);
-      });
+    console.log('🤖 Bot iniciado com sucesso');
+
+    client.onMessage((message) => {
+      if (message.body === 'Oi' && !message.isGroupMsg) {
+        client.sendText(message.from, 'Oi! Tudo bem?');
+      }
+    });
 
   } catch (error) {
-    console.error('Erro ao baixar o Chromium:', error);
+    console.error('❌ Erro ao iniciar o bot:', error);
   }
 })();
