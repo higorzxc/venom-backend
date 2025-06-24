@@ -1,3 +1,14 @@
+const puppeteer = require('puppeteer');
+(async () => {
+try {
+const browserFetcher = puppeteer.createBrowserFetcher();
+const revisionInfo = await browserFetcher.download('1221211');
+console.log('Chromium baixado com sucesso:', revisionInfo.executablePath);
+} catch (error) {
+console.error('Erro ao baixar o Chromium:', error);
+}
+})();
+
 const venom = require('venom-bot');
 const puppeteer = require('puppeteer');
 
