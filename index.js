@@ -1,8 +1,6 @@
-import venom from 'venom-bot';
-import express from 'express';
-import dotenv from 'dotenv';
-
-dotenv.config();
+require("dotenv").config();
+const express = require("express");
+const { create } = require("venom-bot");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,29 +9,31 @@ app.use(express.json());
 
 let client;
 
-venom
-  .create({
-    session: "bot-session",
-    multidevice: true,
-    browserArgs: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-accelerated-2d-canvas',
-      '--no-first-run',
-      '--no-zygote',
-      '--single-process',
-      '--disable-gpu',
-      '--headless=new'
-    ],
-    // Não especifique executablePath aqui no Render, deixe o padrão
-  })
+// Ajuste para rodar o Chrome com o novo modo headless
+const chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+
+create({
+  session: "bot-session",
+  multidevice: true,
+  browserArgs: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',
+    '--disable-accelerated-2d-canvas',
+    '--no-first-run',
+    '--no-zygote',
+    '--single-process',
+    '--disable-gpu',
+    '--headless=new'
+  ],
+  executablePath: chromePath,
+})
   .then((venomClient) => {
     client = venomClient;
     console.log("✅ Bot iniciado com sucesso");
 
     client.onMessage((message) => {
-      if (message.body.toLowerCase() === "oi" && message.isGroupMsg === false) {
+      if (message.body === "oi" && message.isGroupMsg === false) {
         client.sendText(message.from, "Olá! Eu sou um bot automatizado.");
       }
     });

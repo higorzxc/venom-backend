@@ -11,5 +11,4 @@
     "venom-bot": "^5.0.4",
     "puppeteer": "^22.8.2"
   }
-  // "type": "module" <-- REMOVA ou comente essa linha se existir
 }
