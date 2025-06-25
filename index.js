@@ -13,16 +13,16 @@ create({
   session: "bot-session",
   multidevice: true,
   headless: 'new',
-  // NÃO precisa mais colocar executablePath aqui!
+  executablePath: '/usr/bin/google-chrome',
   browserArgs: [
-    "--no-sandbox",
-    "--disable-setuid-sandbox",
-    "--disable-dev-shm-usage",
-    "--disable-accelerated-2d-canvas",
-    "--no-first-run",
-    "--no-zygote",
-    "--single-process",
-    "--disable-gpu"
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',
+    '--disable-accelerated-2d-canvas',
+    '--no-first-run',
+    '--no-zygote',
+    '--single-process',
+    '--disable-gpu'
   ]
 })
   .then((venomClient) => {
