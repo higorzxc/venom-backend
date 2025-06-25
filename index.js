@@ -50,6 +50,14 @@ app.get("/", (req, res) => {
   res.send("🤖 Bot Venom está rodando com sucesso!");
 });
 
+app.get("/status", (req, res) => {
+  const isConnected = client ? true : false;
+  res.json({
+    status: isConnected ? "online" : "offline"
+  });
+});
+
+
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
