@@ -12,8 +12,10 @@ let client;
 create({
   session: "bot-session",
   multidevice: true,
-  headless: 'new',
-  executablePath: '/usr/bin/google-chrome',
+  headless: true,
+  logQR: true,            // ✅ Mostra o QR no terminal
+  qrTimeout: 0,           // ✅ Espera até você escanear
+  disableWelcome: true,   // ✅ Evita spam de mensagem de boas-vindas
   browserArgs: [
     '--no-sandbox',
     '--disable-setuid-sandbox',
