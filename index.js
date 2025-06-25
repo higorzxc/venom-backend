@@ -51,9 +51,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/status", (req, res) => {
-  const isConnected = client ? true : false;
-  res.json({
-    status: isConnected ? "online" : "offline"
+  if (!client) {
+    return res.json({ status: "offline" });
+  }
+
+  client.getState().then((state) => {
+    const isOnline = ["CONNECTED", "OPENING"].includes(state);
+    res.json({ status: isOnline ? "online" : state.toLowerCase() });
+  }).catch((err) => {
+    res.json({ status: "offline", error: err.message });
   });
 });
 
