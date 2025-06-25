@@ -1,50 +1,43 @@
 require("dotenv").config();
 const express = require("express");
 const { create } = require("venom-bot");
-const puppeteer = require("puppeteer"); // importante: precisa estar nas dependências
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json()); // ESSENCIAL para ler o corpo das requisições POST
+app.use(express.json());
 
 let client;
 
-(async () => {
-  // Instala o Chrome no primeiro carregamento
-  const browserFetcher = puppeteer.createBrowserFetcher();
-  const revisionInfo = await browserFetcher.download('1276747'); // versão compatível com venom
+create({
+  session: "bot-session",
+  multidevice: true,
+  headless: 'new',
+  executablePath: "/usr/bin/google-chrome", // usa o Chrome instalado via install_chrome.sh
+  browserArgs: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',
+    '--disable-accelerated-2d-canvas',
+    '--no-first-run',
+    '--no-zygote',
+    '--single-process',
+    '--disable-gpu'
+  ]
+})
+  .then((venomClient) => {
+    client = venomClient;
+    console.log("✅ Bot iniciado com sucesso");
 
-  create({
-    session: "bot-session",
-    multidevice: true,
-    headless: 'new', // recomendado pela própria lib
-    executablePath: revisionInfo.executablePath, // caminho do chrome baixado
-    browserArgs: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-accelerated-2d-canvas',
-      '--no-first-run',
-      '--no-zygote',
-      '--single-process',
-      '--disable-gpu'
-    ]
-  })
-    .then((venomClient) => {
-      client = venomClient;
-      console.log("✅ Bot iniciado com sucesso");
-
-      client.onMessage((message) => {
-        if (message.body.toLowerCase() === "oi" && !message.isGroupMsg) {
-          client.sendText(message.from, "Olá! Eu sou um bot automatizado.");
-        }
-      });
-    })
-    .catch((err) => {
-      console.error("❌ Erro ao iniciar o Venom:", err);
+    client.onMessage((message) => {
+      if (message.body.toLowerCase() === "oi" && !message.isGroupMsg) {
+        client.sendText(message.from, "Olá! Eu sou um bot automatizado.");
+      }
     });
-})();
+  })
+  .catch((err) => {
+    console.error("❌ Erro ao iniciar o Venom:", err);
+  });
 
 app.get("/", (req, res) => {
   res.send("🤖 Bot Venom está rodando com sucesso!");
@@ -63,11 +56,9 @@ app.get("/status", (req, res) => {
   });
 });
 
-// ======= ROTA ADICIONADA: /send-message =======
 app.post("/send-message", async (req, res) => {
   const { number, message } = req.body;
 
-  // Validação simples dos parâmetros recebidos
   if (!number || !message) {
     return res.status(400).json({ error: "Número e mensagem são obrigatórios." });
   }
@@ -77,7 +68,6 @@ app.post("/send-message", async (req, res) => {
   }
 
   try {
-    // Envia a mensagem para o número com o sufixo @c.us (padrão do WhatsApp)
     await client.sendText(`${number}@c.us`, message);
     res.json({ success: true, message: "Mensagem enviada com sucesso!" });
   } catch (error) {
