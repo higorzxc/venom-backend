@@ -12,8 +12,8 @@ let client;
 create({
   session: "bot-session",
   multidevice: true,
-  headless: 'new',
-  executablePath: "/usr/bin/google-chrome", // usa o Chrome instalado via install_chrome.sh
+  headless: 'new', // modo atualizado
+  executablePath: '/usr/bin/google-chrome', // usar o Chrome que instalamos no Render
   browserArgs: [
     '--no-sandbox',
     '--disable-setuid-sandbox',
@@ -29,6 +29,7 @@ create({
     client = venomClient;
     console.log("✅ Bot iniciado com sucesso");
 
+    // Resposta de exemplo
     client.onMessage((message) => {
       if (message.body.toLowerCase() === "oi" && !message.isGroupMsg) {
         client.sendText(message.from, "Olá! Eu sou um bot automatizado.");
@@ -39,23 +40,20 @@ create({
     console.error("❌ Erro ao iniciar o Venom:", err);
   });
 
-app.get("/", (req, res) => {
-  res.send("🤖 Bot Venom está rodando com sucesso!");
-});
+// Verifica status
+app.get("/status", async (req, res) => {
+  if (!client) return res.json({ status: "offline" });
 
-app.get("/status", (req, res) => {
-  if (!client) {
-    return res.json({ status: "offline" });
-  }
-
-  client.getState().then((state) => {
+  try {
+    const state = await client.getState();
     const isOnline = ["CONNECTED", "OPENING"].includes(state);
     res.json({ status: isOnline ? "online" : state.toLowerCase() });
-  }).catch((err) => {
+  } catch (err) {
     res.json({ status: "offline", error: err.message });
-  });
+  }
 });
 
+// Envia mensagem
 app.post("/send-message", async (req, res) => {
   const { number, message } = req.body;
 
@@ -69,10 +67,14 @@ app.post("/send-message", async (req, res) => {
 
   try {
     await client.sendText(`${number}@c.us`, message);
-    res.json({ success: true, message: "Mensagem enviada com sucesso!" });
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
+});
+
+app.get("/", (req, res) => {
+  res.send("🤖 Bot Venom está rodando com sucesso!");
 });
 
 app.listen(PORT, () => {
