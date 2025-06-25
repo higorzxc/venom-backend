@@ -6,7 +6,7 @@ const puppeteer = require("puppeteer"); // importante: precisa estar nas depend�
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+app.use(express.json()); // ESSENCIAL para ler o corpo das requisições POST
 
 let client;
 
@@ -63,6 +63,27 @@ app.get("/status", (req, res) => {
   });
 });
 
+// ======= ROTA ADICIONADA: /send-message =======
+app.post("/send-message", async (req, res) => {
+  const { number, message } = req.body;
+
+  // Validação simples dos parâmetros recebidos
+  if (!number || !message) {
+    return res.status(400).json({ error: "Número e mensagem são obrigatórios." });
+  }
+
+  if (!client) {
+    return res.status(503).json({ error: "Cliente WhatsApp não está inicializado ainda." });
+  }
+
+  try {
+    // Envia a mensagem para o número com o sufixo @c.us (padrão do WhatsApp)
+    await client.sendText(`${number}@c.us`, message);
+    res.json({ success: true, message: "Mensagem enviada com sucesso!" });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
