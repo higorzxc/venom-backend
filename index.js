@@ -9,12 +9,10 @@ app.use(express.json());
 
 let client;
 
-// Ajuste para rodar o Chrome com o novo modo headless
-const chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
-
 create({
   session: "bot-session",
   multidevice: true,
+  headless: true,
   browserArgs: [
     '--no-sandbox',
     '--disable-setuid-sandbox',
@@ -23,27 +21,25 @@ create({
     '--no-first-run',
     '--no-zygote',
     '--single-process',
-    '--disable-gpu',
-    '--headless=new'
-  ],
-  executablePath: chromePath,
+    '--disable-gpu'
+  ]
 })
   .then((venomClient) => {
     client = venomClient;
     console.log("✅ Bot iniciado com sucesso");
 
     client.onMessage((message) => {
-      if (message.body === "oi" && message.isGroupMsg === false) {
+      if (message.body.toLowerCase() === "oi" && !message.isGroupMsg) {
         client.sendText(message.from, "Olá! Eu sou um bot automatizado.");
       }
     });
   })
   .catch((err) => {
-    console.error("Erro ao iniciar o Venom:", err);
+    console.error("❌ Erro ao iniciar o Venom:", err);
   });
 
 app.get("/", (req, res) => {
-  res.send("Bot Venom está rodando!");
+  res.send("🤖 Bot Venom está rodando com sucesso!");
 });
 
 app.listen(PORT, () => {
