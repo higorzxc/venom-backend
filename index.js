@@ -8,7 +8,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*", // ou restrinja para sua Vercel se quiser
+    origin: "*",
     methods: ["GET", "POST"]
   }
 });
@@ -20,7 +20,7 @@ let client;
 create({
   session: "bot-session",
   multidevice: true,
-  headless: true,
+  headless: "new", // recomendado pela Venom
   browserArgs: [
     "--no-sandbox",
     "--disable-setuid-sandbox",
@@ -36,6 +36,7 @@ create({
     client = venomClient;
     console.log("✅ Bot iniciado com sucesso");
 
+    // Evento de nova mensagem
     client.onMessage((message) => {
       if (message.body.toLowerCase() === "oi" && !message.isGroupMsg) {
         client.sendText(message.from, "Olá! Eu sou um bot automatizado.");
@@ -43,6 +44,12 @@ create({
     });
 
     // Evento de QR Code
+    client.on("qr", (qrCode) => {
+      console.log("📲 QR Code gerado:", qrCode);
+      io.emit("qr", { qr: qrCode }); // <-- EMISSÃO para o painel
+    });
+
+    // Outros eventos de estado (opcional)
     client.onStreamChange((state) => {
       console.log("📡 Estado do stream:", state);
     });
@@ -50,17 +57,12 @@ create({
     client.onStateChange((state) => {
       console.log("🧭 Estado do cliente:", state);
     });
-
-    client.on("qr", (qrCode) => {
-      console.log("📲 QR Code gerado:", qrCode);
-      io.emit("qr", { qr: qrCode });
-    });
-
   })
   .catch((err) => {
     console.error("❌ Erro ao iniciar o Venom:", err);
   });
 
+// Endpoint de status para o painel saber se está online
 app.get("/status", async (req, res) => {
   if (!client) {
     return res.json({ status: "offline" });
@@ -75,10 +77,12 @@ app.get("/status", async (req, res) => {
   }
 });
 
+// Rota raiz
 app.get("/", (req, res) => {
   res.send("🤖 Bot Venom está rodando com sucesso!");
 });
 
+// Inicia o servidor
 server.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
