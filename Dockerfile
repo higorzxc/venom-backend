@@ -1,26 +1,53 @@
-# Usando a versão 20 do Node.js
+# Usa imagem oficial Node.js
 FROM node:20
 
-# Instala dependências necessárias para o Chrome e X11
-RUN apt-get update && apt-get install -y wget gnupg curl ca-certificates fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libatk1.0-0 libcups2 libdbus-1-3 libgdk-pixbuf2.0-0 libnspr4 libnss3 libx11-xcb1 libxcomposite1 libxdamage1 libxrandr2 xdg-utils dbus-x11 --no-install-recommends
+# Instala dependências do sistema necessárias para o Chrome rodar em headless
+RUN apt-get update && apt-get install -y \
+  wget \
+  gnupg \
+  curl \
+  ca-certificates \
+  fonts-liberation \
+  libappindicator3-1 \
+  libasound2 \
+  libatk-bridge2.0-0 \
+  libatk1.0-0 \
+  libcups2 \
+  libdbus-1-3 \
+  libgdk-pixbuf2.0-0 \
+  libnspr4 \
+  libnss3 \
+  libx11-xcb1 \
+  libxcomposite1 \
+  libxdamage1 \
+  libxrandr2 \
+  xdg-utils \
+  dbus-x11 \
+  --no-install-recommends && \
+  rm -rf /var/lib/apt/lists/*
 
-# Baixa e instala o Chrome
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
+# Instala Google Chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+  dpkg -i google-chrome-stable_current_amd64.deb || apt-get -fy install && \
+  rm google-chrome-stable_current_amd64.deb
 
-# Define o diretório de trabalho
+# Cria diretório de trabalho
 WORKDIR /app
 
-# Copia todos os arquivos do projeto para dentro do container
+# Copia o conteúdo do projeto para o container
 COPY . .
 
-# Instala as dependências do projeto
+# Instala dependências do projeto
 RUN npm install
 
-# Garantir a instalação do sharp com a arquitetura correta do sistema Linux
-RUN npm install sharp --platform=linux --arch=x64
+# Adicionalmente força o Puppeteer a usar Chrome global (opcional, pode evitar conflitos)
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome
 
-# Expondo a porta que a aplicação vai rodar
+# Instala sharp se for necessário (você só precisa se realmente usa imagens no backend)
+RUN npm install sharp --platform=linux --arch=x64 || true
+
+# Expõe porta padrão
 EXPOSE 3000
 
-# Comando para rodar a aplicação no modo headless
+# Inicia a aplicação
 CMD ["npm", "start"]
