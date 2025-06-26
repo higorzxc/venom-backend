@@ -3,15 +3,15 @@ import express from 'express';
 import { create } from 'venom-bot';
 import http from 'http';
 import { Server } from 'socket.io';
-import bodyParser from 'body-parser'; // Importando o body-parser
+import bodyParser from 'body-parser';
 
-dotenv.config();
+dotenv.config(); // Carrega as variáveis de ambiente
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*", // permite acesso de qualquer domínio (Vercel incluso)
+    origin: "*",
     methods: ["GET", "POST"]
   }
 });
@@ -19,29 +19,25 @@ const io = new Server(server, {
 const PORT = process.env.PORT || 3000;
 
 let client;
-let lastQrCode = null; // Armazena o último QR code gerado
+let lastQrCode = null;
 
-// Middleware para ler o corpo da requisição
-app.use(bodyParser.json()); // Usando body-parser para ler o corpo das requisições JSON
+app.use(bodyParser.json());
 
-// Rota de login para validação da senha
 app.post("/login", (req, res) => {
-  const { password } = req.body; // Recebe a senha do corpo da requisição
-  const correctPassword = "admin123"; // A senha correta
+  const { password } = req.body;
+  const correctPassword = "admin123"; 
 
   if (password !== correctPassword) {
-    return res.status(401).send({ message: "Senha incorreta!" }); // Se a senha estiver incorreta, retorna erro
+    return res.status(401).send({ message: "Senha incorreta!" });
   }
 
-  // Senha correta, continua o processo
   res.status(200).send({ message: "Login bem-sucedido!" });
 });
 
-// Inicializa o Venom
 create({
   session: "bot-session",
   multidevice: true,
-  headless: false, // Alterado para false para abrir o navegador de forma visível
+  headless: false,
   browserArgs: [
     "--no-sandbox",
     "--disable-setuid-sandbox",
@@ -57,21 +53,18 @@ create({
     client = venomClient;
     console.log("✅ Bot iniciado com sucesso");
 
-    // Responde "oi"
     client.onMessage((message) => {
       if (message.body.toLowerCase() === "oi" && !message.isGroupMsg) {
         client.sendText(message.from, "Olá! Eu sou um bot automatizado.");
       }
     });
 
-    // Recebe o QR code e envia para o painel
     client.on("qr", (qrCode) => {
       console.log("📲 QR Code gerado:", qrCode);
       lastQrCode = qrCode;
       io.emit("qr", { qr: qrCode });
     });
 
-    // Monitoramento de estado
     client.onStreamChange((state) => {
       console.log("📡 Estado do stream:", state);
     });
@@ -84,7 +77,6 @@ create({
     console.error("❌ Erro ao iniciar o Venom:", err);
   });
 
-// Verifica se o bot está online
 app.get("/status", async (req, res) => {
   if (!client) return res.json({ status: "offline" });
 
@@ -97,7 +89,6 @@ app.get("/status", async (req, res) => {
   }
 });
 
-// Retorna o último QR code gerado
 app.get("/qr", (req, res) => {
   if (!lastQrCode) {
     return res.status(404).json({ error: "QR Code ainda não disponível" });
@@ -105,12 +96,10 @@ app.get("/qr", (req, res) => {
   res.json({ qrCode: lastQrCode });
 });
 
-// Página raiz
 app.get("/", (req, res) => {
   res.send("🤖 Bot Venom está rodando com sucesso!");
 });
 
-// Inicia o servidor
 server.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
