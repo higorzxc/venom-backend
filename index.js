@@ -16,6 +16,7 @@ const io = new Server(server, {
 const PORT = process.env.PORT || 3000;
 
 let client;
+let lastQrCode = null; // Variável para armazenar o último QR Code gerado
 
 create({
   session: "bot-session",
@@ -46,10 +47,11 @@ create({
     // Evento de QR Code
     client.on("qr", (qrCode) => {
       console.log("📲 QR Code gerado:", qrCode);
-      io.emit("qr", { qr: qrCode }); // <-- EMISSÃO para o painel
+      lastQrCode = qrCode; // Guarda o QR Code para a rota /qr
+      io.emit("qr", { qr: qrCode }); // Emite para o painel em tempo real
     });
 
-    // Outros eventos de estado (opcional)
+    // Eventos de estado (opcionais)
     client.onStreamChange((state) => {
       console.log("📡 Estado do stream:", state);
     });
@@ -62,7 +64,7 @@ create({
     console.error("❌ Erro ao iniciar o Venom:", err);
   });
 
-// Endpoint de status para o painel saber se está online
+// Endpoint de status para o painel saber se o bot está online
 app.get("/status", async (req, res) => {
   if (!client) {
     return res.json({ status: "offline" });
@@ -77,7 +79,15 @@ app.get("/status", async (req, res) => {
   }
 });
 
-// Rota raiz
+// Rota para retornar o último QR Code gerado
+app.get("/qr", (req, res) => {
+  if (!lastQrCode) {
+    return res.status(404).json({ error: "QR Code ainda não disponível" });
+  }
+  res.json({ qrCode: lastQrCode });
+});
+
+// Rota raiz apenas para teste simples
 app.get("/", (req, res) => {
   res.send("🤖 Bot Venom está rodando com sucesso!");
 });
