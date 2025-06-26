@@ -1,9 +1,11 @@
-require("dotenv").config();
-const express = require("express");
-const { create } = require("venom-bot");
-const http = require("http");
-const { Server } = require("socket.io");
-const bodyParser = require('body-parser'); // Importando o body-parser
+import dotenv from 'dotenv';
+import express from 'express';
+import { create } from 'venom-bot';
+import http from 'http';
+import { Server } from 'socket.io';
+import bodyParser from 'body-parser'; // Importando o body-parser
+
+dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
