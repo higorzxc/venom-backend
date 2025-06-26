@@ -16,11 +16,12 @@ const io = new Server(server, {
 const PORT = process.env.PORT || 3000;
 
 let client;
+let latestQrCode = null; // ✅ variável para armazenar o último QR gerado
 
 create({
   session: "bot-session",
   multidevice: true,
-  headless: "new", // recomendado pela Venom
+  headless: "new",
   browserArgs: [
     "--no-sandbox",
     "--disable-setuid-sandbox",
@@ -45,11 +46,11 @@ create({
 
     // Evento de QR Code
     client.on("qr", (qrCode) => {
-      console.log("📲 QR Code gerado:", qrCode);
-      io.emit("qr", { qr: qrCode }); // <-- EMISSÃO para o painel
+      console.log("📲 QR Code gerado");
+      latestQrCode = `data:image/png;base64,${qrCode}`; // ✅ armazena o QR como base64
+      io.emit("qr", { qr: latestQrCode }); // também emite para quem usa websocket
     });
 
-    // Outros eventos de estado (opcional)
     client.onStreamChange((state) => {
       console.log("📡 Estado do stream:", state);
     });
@@ -62,7 +63,16 @@ create({
     console.error("❌ Erro ao iniciar o Venom:", err);
   });
 
-// Endpoint de status para o painel saber se está online
+// ✅ NOVO ENDPOINT: retorna o QR Code atual
+app.get("/qr", (req, res) => {
+  if (latestQrCode) {
+    res.json({ qrCode: latestQrCode });
+  } else {
+    res.status(404).json({ error: "QR Code ainda não disponível" });
+  }
+});
+
+// Endpoint de status
 app.get("/status", async (req, res) => {
   if (!client) {
     return res.json({ status: "offline" });
@@ -82,7 +92,7 @@ app.get("/", (req, res) => {
   res.send("🤖 Bot Venom está rodando com sucesso!");
 });
 
-// Inicia o servidor
+// Inicia servidor
 server.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
