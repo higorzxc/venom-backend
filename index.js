@@ -24,6 +24,7 @@ let lastQrCode = null;
 
 app.use(bodyParser.json());
 
+// Endpoint de login simples
 app.post("/login", (req, res) => {
   const { password } = req.body;
   const correctPassword = "admin123";
@@ -35,10 +36,11 @@ app.post("/login", (req, res) => {
   res.status(200).send({ message: "Login bem-sucedido!" });
 });
 
+// Criação do cliente Venom
 create({
   session: "bot-session",
   multidevice: true,
-  headless: true,
+  headless: "new",
   browserArgs: [
     "--no-sandbox",
     "--disable-setuid-sandbox",
@@ -65,34 +67,35 @@ create({
     "--v=1"
   ]
 })
-.then((venomClient) => {
-  client = venomClient;
-  console.log("✅ Bot iniciado com sucesso");
+  .then((venomClient) => {
+    client = venomClient;
+    console.log("✅ Bot iniciado com sucesso");
 
-  client.onMessage((message) => {
-    if (message.body.toLowerCase() === "oi" && !message.isGroupMsg) {
-      client.sendText(message.from, "Olá! Eu sou um bot automatizado.");
-    }
+    client.onMessage((message) => {
+      if (message.body.toLowerCase() === "oi" && !message.isGroupMsg) {
+        client.sendText(message.from, "Olá! Eu sou um bot automatizado.");
+      }
+    });
+
+    client.on("qr", (qrCode) => {
+      console.log("📲 QR Code gerado:", qrCode);
+      lastQrCode = qrCode;
+      io.emit("qr", { qr: qrCode });
+    });
+
+    client.onStreamChange((state) => {
+      console.log("📡 Estado do stream:", state);
+    });
+
+    client.onStateChange((state) => {
+      console.log("🧭 Estado do cliente:", state);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ Erro ao iniciar o Venom:", err);
   });
 
-  client.on("qr", (qrCode) => {
-    console.log("📲 QR Code gerado:", qrCode);
-    lastQrCode = qrCode;
-    io.emit("qr", { qr: qrCode });
-  });
-
-  client.onStreamChange((state) => {
-    console.log("📡 Estado do stream:", state);
-  });
-
-  client.onStateChange((state) => {
-    console.log("🧭 Estado do cliente:", state);
-  });
-})
-.catch((err) => {
-  console.error("❌ Erro ao iniciar o Venom:", err);
-});
-
+// Rota de status do bot
 app.get("/status", async (req, res) => {
   if (!client) return res.json({ status: "offline" });
 
@@ -105,6 +108,7 @@ app.get("/status", async (req, res) => {
   }
 });
 
+// Rota para pegar o QR code
 app.get("/qr", (req, res) => {
   if (!lastQrCode) {
     return res.status(404).json({ error: "QR Code ainda não disponível" });
@@ -112,6 +116,7 @@ app.get("/qr", (req, res) => {
   res.json({ qrCode: lastQrCode });
 });
 
+// Rota raiz
 app.get("/", (req, res) => {
   res.send("🤖 Bot Venom está rodando com sucesso!");
 });
