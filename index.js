@@ -8,7 +8,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*",  // Permite todas as origens (necessário para Vercel)
+    origin: "*", // permite acesso de qualquer domínio (Vercel incluso)
     methods: ["GET", "POST"]
   }
 });
@@ -16,12 +16,13 @@ const io = new Server(server, {
 const PORT = process.env.PORT || 3000;
 
 let client;
-let lastQrCode = null; // Variável para armazenar o último QR Code gerado
+let lastQrCode = null; // Armazena o último QR code gerado
 
+// Inicializa o Venom
 create({
   session: "bot-session",
   multidevice: true,
-  headless: "new", // recomendado pela Venom
+  headless: "new",
   browserArgs: [
     "--no-sandbox",
     "--disable-setuid-sandbox",
@@ -37,21 +38,21 @@ create({
     client = venomClient;
     console.log("✅ Bot iniciado com sucesso");
 
-    // Evento de nova mensagem
+    // Responde "oi"
     client.onMessage((message) => {
       if (message.body.toLowerCase() === "oi" && !message.isGroupMsg) {
         client.sendText(message.from, "Olá! Eu sou um bot automatizado.");
       }
     });
 
-    // Evento de QR Code
+    // Recebe o QR code e envia para o painel
     client.on("qr", (qrCode) => {
       console.log("📲 QR Code gerado:", qrCode);
-      lastQrCode = qrCode; // Guarda o QR Code para a rota /qr
-      io.emit("qr", { qr: qrCode }); // Emite para o painel em tempo real
+      lastQrCode = qrCode;
+      io.emit("qr", { qr: qrCode });
     });
 
-    // Eventos de estado (opcionais)
+    // Monitoramento de estado
     client.onStreamChange((state) => {
       console.log("📡 Estado do stream:", state);
     });
@@ -64,11 +65,9 @@ create({
     console.error("❌ Erro ao iniciar o Venom:", err);
   });
 
-// Endpoint de status para o painel saber se o bot está online
+// Verifica se o bot está online
 app.get("/status", async (req, res) => {
-  if (!client) {
-    return res.json({ status: "offline" });
-  }
+  if (!client) return res.json({ status: "offline" });
 
   try {
     const state = await client.getState();
@@ -79,7 +78,7 @@ app.get("/status", async (req, res) => {
   }
 });
 
-// Rota para retornar o último QR Code gerado
+// Retorna o último QR code gerado
 app.get("/qr", (req, res) => {
   if (!lastQrCode) {
     return res.status(404).json({ error: "QR Code ainda não disponível" });
@@ -87,7 +86,7 @@ app.get("/qr", (req, res) => {
   res.json({ qrCode: lastQrCode });
 });
 
-// Rota raiz apenas para teste simples
+// Página raiz
 app.get("/", (req, res) => {
   res.send("🤖 Bot Venom está rodando com sucesso!");
 });
