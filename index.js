@@ -3,6 +3,7 @@ const express = require("express");
 const { create } = require("venom-bot");
 const http = require("http");
 const { Server } = require("socket.io");
+const bodyParser = require('body-parser'); // Importando o body-parser
 
 const app = express();
 const server = http.createServer(app);
@@ -18,11 +19,27 @@ const PORT = process.env.PORT || 3000;
 let client;
 let lastQrCode = null; // Armazena o último QR code gerado
 
+// Middleware para ler o corpo da requisição
+app.use(bodyParser.json()); // Usando body-parser para ler o corpo das requisições JSON
+
+// Rota de login para validação da senha
+app.post("/login", (req, res) => {
+  const { password } = req.body; // Recebe a senha do corpo da requisição
+  const correctPassword = "admin123"; // A senha correta
+
+  if (password !== correctPassword) {
+    return res.status(401).send({ message: "Senha incorreta!" }); // Se a senha estiver incorreta, retorna erro
+  }
+
+  // Senha correta, continua o processo
+  res.status(200).send({ message: "Login bem-sucedido!" });
+});
+
 // Inicializa o Venom
 create({
   session: "bot-session",
   multidevice: true,
-  headless: "new",
+  headless: false, // Alterado para false para abrir o navegador de forma visível
   browserArgs: [
     "--no-sandbox",
     "--disable-setuid-sandbox",
