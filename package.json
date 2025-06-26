@@ -2,6 +2,7 @@
   "name": "venom-backend",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",  // Adicionada para indicar que o projeto é um módulo ES
   "scripts": {
     "start": "node index.js"
   },
