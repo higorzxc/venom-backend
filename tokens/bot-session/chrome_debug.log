@@ -1,0 +1,108 @@
+[26328:24948:0629/162606.520:VERBOSE1:components\enterprise\browser\controller\chrome_browser_cloud_management_controller.cc:103] DM token = empty
+[26328:24948:0629/162606.520:VERBOSE1:components\enterprise\browser\controller\chrome_browser_cloud_management_controller.cc:109] Enrollment token = 
+[26328:24948:0629/162606.520:VERBOSE1:components\enterprise\browser\controller\chrome_browser_cloud_management_controller.cc:110] Client ID = e26071ea-6ec9-4d47-a8f5-70dfa6a3e2fc
+[26328:24948:0629/162606.522:VERBOSE1:components\variations\service\variations_field_trial_creator_base.cc:85] VariationsSeedUsage:12
+[26328:24948:0629/162606.522:VERBOSE1:components\variations\service\variations_field_trial_creator_base.cc:359] VariationsSetupComplete
+[26328:24948:0629/162606.546:VERBOSE1:chrome\browser\media\webrtc\webrtc_event_log_manager.cc:121] WebRTC remote-bound event logging enabled.
+[26328:24948:0629/162606.546:VERBOSE1:components\proxy_config\pref_proxy_config_tracker_impl.cc:199] 0x6f0c0223c580: set chrome proxy config service to 0x6f0c023101a0
+[26328:24948:0629/162606.557:VERBOSE1:components\device_event_log\device_event_log_impl.cc:200] [16:26:06.555] Display: EVENT: screen_win.cc:989 Displays updated, count: 1
+[26328:24948:0629/162606.557:VERBOSE1:components\device_event_log\device_event_log_impl.cc:200] [16:26:06.558] Display: EVENT: screen_win.cc:991 Display[2164629918] bounds=[0,0 1600x900], workarea=[0,0 1600x852], scale=1, rotation=0, panel_rotation=0 external detected
+[26328:12324:0629/162606.562:VERBOSE1:content\browser\renderer_host\media\media_stream_manager.cc:1510] MSM::InitializeMaybeAsync([this=0x6f0c02308140])
+[26328:12324:0629/162606.562:VERBOSE1:content\browser\renderer_host\media\media_stream_manager.cc:1510] MDM::MediaDevicesManager()
+[26328:12324:0629/162606.562:VERBOSE1:content\browser\renderer_host\media\media_stream_manager.cc:1510] MSM::MediaStreamManager([this=0x6f0c02308140]))
+[26328:24948:0629/162606.564:ERROR:chrome\browser\net\system_network_context_manager.cc:891] Cannot use V8 Proxy resolver in single process mode.
+[26328:24948:0629/162606.565:VERBOSE1:components\enterprise\browser\controller\chrome_browser_cloud_management_controller.cc:174] Starting CBCM Controller Initialization
+[26328:24948:0629/162606.565:INFO:components\enterprise\browser\controller\chrome_browser_cloud_management_controller.cc:202] No machine level policy manager exists.
+[26328:24948:0629/162606.565:VERBOSE1:chrome\installer\util\install_util.cc:218] Existing Chrome version found: 138.0.7204.50
+[26328:24948:0629/162606.566:VERBOSE1:chrome\browser\enterprise\platform_auth\platform_auth_policy_observer.cc:75] PlatformAuthProviderManager enabled: 0
+[26328:24948:0629/162606.575:VERBOSE1:components\proxy_config\pref_proxy_config_tracker_impl.cc:199] 0x6f0c0223e100: set chrome proxy config service to 0x6f0c02314100
+[26328:24948:0629/162606.576:ERROR:chrome\browser\net\system_network_context_manager.cc:891] Cannot use V8 Proxy resolver in single process mode.
+[26328:24948:0629/162606.576:VERBOSE1:components\signin\internal\identity_manager\mutable_profile_oauth2_token_service_delegate.cc:310] MutablePO2TS::MutablePO2TS
+[26328:24948:0629/162606.577:VERBOSE1:components\device_event_log\device_event_log_impl.cc:200] [16:26:06.578] Bluetooth: EVENT: bluetooth_api.cc:82 BluetoothAPI: 0x6f0c027b9a00
+[26328:24948:0629/162606.578:VERBOSE1:components\proxy_config\pref_proxy_config_tracker_impl.cc:199] 0x6f0c0223e680: set chrome proxy config service to 0x6f0c02316e80
+[26328:24948:0629/162606.579:VERBOSE1:google_apis\gaia\gaia_auth_util.cc:55] Canonicalized @gmail.com to @gmail.com
+[26328:24948:0629/162606.579:VERBOSE1:google_apis\gaia\gaia_auth_util.cc:55] Canonicalized @gmail.com to @gmail.com
+[26328:24948:0629/162606.580:VERBOSE1:extensions\browser\api\bluetooth_low_energy\bluetooth_low_energy_event_router.cc:291] Initializing BluetoothLowEnergyEventRouter.
+[26328:27356:0629/162606.584:VERBOSE1:components\signin\public\webdata\token_service_table.cc:202] Loaded tokens: result = 3 ; number of tokens loaded = 0
+[26328:24948:0629/162606.585:VERBOSE1:extensions\browser\extension_registrar.cc:514] AddComponentExtension Web Store
+[26328:24948:0629/162606.585:VERBOSE1:extensions\browser\extension_registrar.cc:514] AddComponentExtension Chrome PDF Viewer
+[26328:12324:0629/162606.585:VERBOSE1:extensions\browser\content_verifier\content_verifier.cc:870] OnFetchComplete ahfgeienlihckogmohjhadlkjgocpleb success:0
+[26328:24948:0629/162606.585:VERBOSE1:extensions\browser\extension_registrar.cc:514] AddComponentExtension Google Hangouts
+[26328:12324:0629/162606.585:VERBOSE1:extensions\browser\content_verifier\content_verifier.cc:870] OnFetchComplete mhjfbmdgcfjbbpaeojofohoefgiehjai success:0
+[26328:24948:0629/162606.586:VERBOSE1:extensions\browser\extension_registrar.cc:514] AddComponentExtension Google Network Speech
+[26328:24948:0629/162606.586:VERBOSE1:extensions\browser\extension_registrar.cc:516] Component extension Google Network Speech (fignfifoniblkonapihmkfakmlgkbkcf) installing/upgrading from '' to 1.0
+[26328:12324:0629/162606.586:VERBOSE1:extensions\browser\content_verifier\content_verifier.cc:870] OnFetchComplete nkeimhogjdpnpccoofpliimaahmaaome success:0
+[26328:24948:0629/162606.586:VERBOSE1:components\signin\internal\identity_manager\mutable_profile_oauth2_token_service_delegate.cc:403] MutablePO2TS::RefreshTokenIsAvailable
+[26328:24948:0629/162606.586:VERBOSE1:components\signin\internal\identity_manager\mutable_profile_oauth2_token_service_delegate.cc:403] MutablePO2TS::RefreshTokenIsAvailable
+[26328:24948:0629/162606.586:VERBOSE1:components\signin\core\browser\account_reconcilor.cc:165] AccountReconcilor::AccountReconcilor
+[26328:24948:0629/162606.586:VERBOSE1:components\signin\core\browser\account_reconcilor.cc:203] AccountReconcilor::Initialize
+[26328:24948:0629/162606.586:VERBOSE1:components\signin\core\browser\account_reconcilor.cc:259] AccountReconcilor::RegisterWithContentSettings
+[26328:24948:0629/162606.586:VERBOSE1:components\signin\core\browser\account_reconcilor.cc:282] AccountReconcilor::RegisterWithIdentityManager
+[26328:24948:0629/162606.586:VERBOSE1:chrome\browser\profiles\profile_manager.cc:1929] ForceSigninCheck: 0, 0, 1
+[26328:24948:0629/162606.587:ERROR:chrome\browser\net\system_network_context_manager.cc:891] Cannot use V8 Proxy resolver in single process mode.
+[26328:24948:0629/162606.587:WARNING:chrome\browser\chrome_browser_main_win.cc:863] Command line too long for RegisterApplicationRestart:  --allow-pre-commit-input --disable-accelerated-2d-canvas --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-blink-features=AutomationControlled --disable-breakpad --disable-client-side-phishing-detection --disable-component-update --disable-dev-shm-usage --disable-features=Translate,BackForwardCache,AcceptCHFrame,MediaRouter,OptimizationHints --disable-gpu --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-setuid-sandbox --disable-sync --enable-automation --enable-blink-features=IdleDetection --enable-features=NetworkServiceInProcess2 --enable-logging --export-tagged-pdf --force-color-profile=srgb --gpu-preferences=UAAAAAAAAADoAAAEAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAA --metrics-recording-only --mute-audio --no-default-browser-check --no-first-run --no-sandbox --no-zygote --password-store=basic --remote-debugging-port=9222 --single-process --use-angle=swiftshader-webgl --use-gl=angle --use-mock-keychain --user-data-dir="C:\Users\Micro\Downloads\venom-backend\tokens\bot-session" --v=1 --restore-last-session --restart
+[26328:24948:0629/162606.588:VERBOSE1:chrome\browser\profiles\profile_manager.cc:1283] AddKeepAlive(Default, kBrowserWindow). keep_alives=[kWaitingForFirstBrowserWindow (1), kBrowserWindow (1)]
+[26328:24948:0629/162606.588:VERBOSE1:chrome\browser\profiles\profile_manager.cc:1365] ClearFirstBrowserWindowKeepAlive(Default). keep_alives=[kBrowserWindow (1)]
+[26328:6856:0629/162606.588:VERBOSE1:components\sessions\core\command_storage_backend.cc:608] CommandStorageBackend::ReadLastSessionCommands, reading commands from: C:\Users\Micro\Downloads\venom-backend\tokens\bot-session\Default\Sessions\Tabs_13395425753112000
+[26328:12324:0629/162606.594:VERBOSE1:extensions\browser\content_verifier\content_verifier.cc:870] OnFetchComplete fignfifoniblkonapihmkfakmlgkbkcf success:0
+[26328:10156:0629/162606.594:WARNING:chrome\browser\extensions\external_pref_loader.cc:293] You are using an old-style extension deployment method (external_extensions.json), which will soon be deprecated. (see http://developer.chrome.com/docs/extensions/how-to/distribute/install-extensions)
+[26328:1536:0629/162606.609:VERBOSE1:components\viz\service\main\viz_main_impl.cc:86] VizNullHypothesis is disabled (not a warning)
+[26328:24948:0629/162606.620:VERBOSE1:google_apis\gaia\gaia_auth_util.cc:55] Canonicalized @gmail.com to @gmail.com
+[26328:24948:0629/162606.620:VERBOSE1:google_apis\gaia\gaia_auth_util.cc:55] Canonicalized @gmail.com to @gmail.com
+[26328:24948:0629/162606.643:VERBOSE1:components\device_event_log\device_event_log_impl.cc:200] [16:26:06.644] Display: EVENT: screen_win.cc:989 Displays updated, count: 1
+[26328:24948:0629/162606.643:VERBOSE1:components\device_event_log\device_event_log_impl.cc:200] [16:26:06.644] Display: EVENT: screen_win.cc:991 Display[2164629918] bounds=[0,0 1600x900], workarea=[0,0 1600x852], scale=1, rotation=0, panel_rotation=0 external detected
+[13068:13624:0629/162606.655:INFO:third_party\webrtc\rtc_base\cpu_info.cc:57] Available number of cores: 12
+[25092:26884:0629/162606.658:INFO:third_party\webrtc\rtc_base\cpu_info.cc:57] Available number of cores: 12
+[26328:8248:0629/162606.705:VERBOSE1:net\base\network_delegate.cc:37] NetworkDelegate::NotifyBeforeURLRequest: http://clients2.google.com/time/1/current?cup2key=9:wvW9w_tTXPkEqmUZWi3GDkWF_RJgot2aWU7cK0NHccU&cup2hreq=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+[26328:24948:0629/162606.705:VERBOSE1:components\signin\internal\identity_manager\mutable_profile_oauth2_token_service_delegate.cc:520] MutablePO2TS::OnWebDataServiceRequestDone. Result type: 6
+[26328:24948:0629/162606.705:VERBOSE1:components\signin\internal\identity_manager\mutable_profile_oauth2_token_service_delegate.cc:579] MutablePO2TS::LoadAllCredentialsIntoMemory; 0 credential(s).
+[26328:24948:0629/162606.705:VERBOSE1:components\signin\internal\identity_manager\mutable_profile_oauth2_token_service_delegate.cc:403] MutablePO2TS::RefreshTokenIsAvailable
+[26328:24948:0629/162606.705:VERBOSE1:components\signin\core\browser\account_reconcilor.cc:384] AccountReconcilor::OnEndBatchOfRefreshTokenStateChanges. Reconcilor state: 1
+[26328:24948:0629/162606.706:WARNING:chrome\browser\extensions\external_registry_loader_win.cc:232] Error observing HKLM: 5
+[26328:8248:0629/162606.707:VERBOSE1:net\base\network_delegate.cc:37] NetworkDelegate::NotifyBeforeURLRequest: https://accounts.google.com/ListAccounts?gpsia=1&source=ChromiumBrowser&json=standard
+[26328:24948:0629/162606.707:VERBOSE1:chrome\browser\profiles\profile_manager.cc:1283] AddKeepAlive(Default, kExtensionUpdater). keep_alives=[kBrowserWindow (1), kExtensionUpdater (1)]
+[26328:8248:0629/162606.707:VERBOSE1:net\base\network_delegate.cc:37] NetworkDelegate::NotifyBeforeURLRequest: https://safebrowsingohttpgateway.googleapis.com/v1/ohttp/hpkekeyconfig?key=AIzaSyA2KlwBX3mkFo30om9LUFYQhpqLoa_BNhE
+[25092:26884:0629/162606.718:VERBOSE1:extensions\renderer\script_context.cc:150] Created context:
+  extension id:           (none)
+  frame:                  0x111c0044da20
+  URL:                    
+  context_type:           WEB_PAGE
+  effective extension id: (none)
+  effective context type: WEB_PAGE
+[25092:26884:0629/162606.719:VERBOSE1:extensions\renderer\script_context.cc:150] Created context:
+  extension id:           (none)
+  frame:                  (nil)
+  URL:                    
+  context_type:           UNSPECIFIED
+  effective extension id: (none)
+  effective context type: UNSPECIFIED
+[25092:26884:0629/162606.719:VERBOSE1:extensions\renderer\dispatcher.cc:570] Num tracked contexts: 1
+[26328:24948:0629/162606.720:VERBOSE1:chrome\browser\profiles\profile_manager.cc:1344] RemoveKeepAlive(Default, kExtensionUpdater). keep_alives=[kBrowserWindow (1)]
+[26328:9296:0629/162606.720:VERBOSE1:net\disk_cache\simple\simple_index_file.cc:607] Simple Cache Index is being restored from disk.
+[26328:24948:0629/162606.729:VERBOSE1:chrome\browser\web_applications\locks\partitioned_lock_manager.cc:211] Acquiring <PartitionedLockId>{id: 0x31, partition: 0} for Start@chrome\browser\web_applications\generated_icon_fix_manager.cc:60
+[26328:24948:0629/162606.729:VERBOSE1:chrome\browser\web_applications\locks\partitioned_lock_manager.cc:193] All locks acquired for Start@chrome\browser\web_applications\generated_icon_fix_manager.cc:60
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing Session.TotalDuration
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing Commerce.PriceDrops.ActiveTabNavigationComplete.IsProductDetailPage
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:54] Segmentation platform started observing Autofill_PolledCreditCardSuggestions
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing IOS.ParcelTracking.Tracked.AutoTrack
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing Omnibox.SuggestionUsed.ClientSummarizedResultType
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:54] Segmentation platform started observing MetadataWriter
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing Sync.DeviceCount2
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing Sync.DeviceCount2.Phone
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing Sync.DeviceCount2.Desktop
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing Sync.DeviceCount2.Tablet
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:54] Segmentation platform started observing MobileBookmarkManagerOpen
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:54] Segmentation platform started observing NewTabPage.MostVisited.Clicked
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:54] Segmentation platform started observing TabGroup.Created.OpenInNewTab
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:54] Segmentation platform started observing Android.HistoryPage.OpenItem
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:54] Segmentation platform started observing MobileMenuRecentTabs
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing PasswordManager.ManagePasswordsReferrer
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing PasswordManager.ProfileStore.TotalAccountsHiRes3.WithScheme.Https
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing PasswordManager.FillingAssistance
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing PasswordManager.SavedPasswordIsGenerated
+[26328:24948:0629/162606.732:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing PasswordManager.SaveUIDismissalReason
+[26328:24948:0629/162606.733:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing PasswordManager.SaveUIDismissalReason
+[26328:24948:0629/162606.733:VERBOSE1:components\segmentation_platform\internal\signals\signal_filter_processor.cc:61] Segmentation platform started observing IOS.CredentialExtension.IsEnabled.Startup
+[26328:24948:0629/162606.733:VERBOSE1:components\device_event_log\device_event_log_impl.cc:200] [16:26:06.734] Display: EVENT: screen_win.cc:989 Displays updated, count: 1
+[26328:24948:0629/162606.733:VERBOSE1:components\device_event_log\device_event_log_impl.cc:200] [16:26:06.734] Display: EVENT: screen_win.cc:991 Display[2164629918] bounds=[0,0 1600x900], workarea=[0,0 1600x852], scale=1, rotation=0, panel_rotation=0 external detected
+[26328:24948:0629/162606.733:VERBOSE1:chrome\browser\web_applications\locks\partitioned_lock_manager.cc:235] Releasing <PartitionedLockId>{id: 0x31, partition: 0} requested by Start@chrome\browser\web_applications\generated_icon_fix_manager.cc:60
